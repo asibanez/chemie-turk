@@ -1,0 +1,98 @@
+<meta content="width=device-width,initial-scale=1" name="viewport" />
+<section class="container" id="Relevancy">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="panel panel-primary"><a class="panel-heading" href="javascript:void(0);" id="collapseTrigger"><strong>Validation Instructions</strong> <span class="collapse-text">(Click to expand)</span> </a>
+		<p>&nbsp;&nbsp; Download the validation instructions <a href="/docs/validation_guide.pdf" target="_blank">here</a> and the annotation instructions
+			<a href="/docs/annotation_guide.pdf" target="_blank">here</a>
+		</p>
+                <div class="panel-body" id="instructionBody"><strong>Tag the description to extract the following fields of interest</strong>
+                    <table class="table table-condensed table-striped table-responsive">
+                        <colgroup>
+                            <col class="col-xs-2 col-md-2" />
+                            <col class="col-xs-10 col-md-10" />
+                        </colgroup>
+                        <tbody id="instruction-table">
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <img src="images/validation.gif" alt="tagging" width="50%"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Validate the <strong id="key-name" class="key-name">name</strong> in the description</h2>
+
+    <div id="raw">${description}</div>
+    <div id="spans">${spans}</div>
+    <div id="Reactants-fill">${Reactants-fill}</div>
+    <div id="Products-fill">${Products-fill}</div>
+    <div id="Yield-fill">${Yield-fill}</div>
+    <div id="Reaction-fill">${Reaction-fill}</div>
+    <div id="Workup_reagents-fill">${Workup_reagents-fill}</div>
+    <div id="Catalyst_Reagents-fill">${Catalyst_Reagents-fill}</div>
+    <div id="Solvent-fill">${Solvent-fill}</div>
+    <div id="Temperature-fill">${Temperature-fill}</div>
+    <div id="Time-fill">${Time-fill}</div>
+    <div id="cveid">${cveid}</div>
+
+    <div class="row" id="workContent">
+        <div class="col-xs-12 col-sm-8 content">
+            <div id="well" class="ann well"></div>
+        </div>
+        <div class="col-xs-12 col-sm-4 fields">
+            <div id="button-div">
+                <button type="button" id="undo" value="undo" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-backward"></span> Undo
+                </button>
+                <button type="button" id="remove" value="remove" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span> Reset
+                </button>
+            </div>
+            <div class="btn-group-vertical" data-toggle="buttons" id="choice">
+            </div>
+        </div>
+    </div>
+    <div> <b>Paper DOI:</b> <a class="results"></a>
+	    <span>&nbsp;&nbsp;&nbsp;</span>
+	    <button type="button" id="copy_doi_btn" value="copy" class="btn btn-primary"> Copy </button>
+    </div>
+    <br>
+    <p style="color:red;font-size:16px;">
+    <b>Warning:</b> Chemical entity names may be either (i) incorrectly spelled and / or (ii) split into several parts. <br>
+    	In case (i) annotate regardless. In case (ii) make sure to annotate the entity as a single span.
+    </p>
+    <br>
+    <div id="form" class="row"> </div>
+    <span title="Highlight all fields before submitting"><input name="submit" id="submit" class="btn btn-default" data-key="Enter" type="submit" disabled=disabled value="Validate annotation"/></span>
+    <span title="Highlight all fields before submitting"><input name="submit-stay" id="submit-stay" class="btn btn-default" data-key="Enter" type="submit" disabled=disabled  value="Validate annotation and add another reaction"/></span>
+    <form>
+       <fieldset>
+         <!--p-->
+             <input type = "checkbox" id = "noReaction" value = "NoReaction"/>
+             <label for = "noReaction">There is no reaction</label>&nbsp;&nbsp;&nbsp;
+             <input type = "checkbox" id = "paragraph_discard" value = "paragraph_discard"/>
+             <label for = "paragraph_discard">Paragraph discarded due to:</label>
+             <select id = "discard_reason" name = "discard_reason">
+               <option value = ""> </option>
+               <option value = "Incomprehensible text">Incomprehensible text</option>
+               <option value = "Partial description">Partial or vague description of a reaction</option>
+               <option value = "Discontinuous phrase">Unable to annotate as a continuous phrase</option>
+               <option value = "Multistep reaction">Multi-step reaction</option>
+             </select>
+         <!--/p-->
+       <fieldset>
+    </form>
+
+</section>
+<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+<link href="style.css" rel="stylesheet" />
+<script src="config.js"></script>
+<!--Uncomment the next line for a NER task-->
+<!--<script src="example/config.js"></script>-->
+<script src="validation.js"></script>
