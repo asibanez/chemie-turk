@@ -1,114 +1,52 @@
-[![CircleCI](https://circleci.com/gh/danvk/localturk.svg?style=svg)](https://circleci.com/gh/danvk/localturk)
+![tagging](https://user-images.githubusercontent.com/13397560/118203495-33771380-b42a-11eb-8742-edc601a78cd7.gif)
 
-localturk
+
+chemie-turk
 =========
 
-Local Turk implements Amazon's Mechanical Turk API on your own machine.
+Chemie-turk builds on top of localturk (https://github.com/danvk/localturk) including additional functionalities and chemistry specific annotation schemas and functionalities
+
+   1. Annotation review and fine-tuning options
+   2. Improved interface with expanded functionalities (e.g. multi-step reaction annotation, paper access, etc.)
+   3. Chemistry specific annotation schemas
 
 It's handy if you want to:
 
-1. Develop a Mechanical Turk template
-2. Do some repetitive tasks on your own, without involving Turkers.
+   1. Annotate chemical literature
+   2. Review and fine-tune existing annotations from chemical literature
 
-You could use it, for instance, to generate test and training data for a Machine Learning algorithm.
-
+Comprehensive annotation and validations manuals as well as short videos showing the process are available in the annotation and validation tools
 
 Quick Start
 -----------
 
-Install:
+Clone repository and enter folder:
 
-    npm install -g localturk
+    git clone https://github.com/asibanez/chemie-turk.git
+    cd chemie-turk
 
-Run:
+Install required node packages:
 
-    cd localturk/sample
-    localturk transcribe.html tasks.csv outputs.csv
+    npm install
 
-Then visit http://localhost:4321/ to start Turking.
+Run annotation:
 
+    ts-node localturk.ts [annotation_template.html] [input.csv] [output.csv]
+    Then visit http://localhost:4321/ to start annotating.
+    
+    Example:
+    ts-node localturk.ts forms/annotation.html test_data/annotate.csv test_data/output.csv
+    http://localhost:4321/
 
-Templates and Tasks
--------------------
+Run review / validation:
 
-Using Local Turk is just like using Amazon's Mechanical Turk. You create:
-
-1. An HTML template file with a &lt;form&gt;
-2. A CSV file of tasks
-
-For example, say you wanted to record whether some images contained a red ball. You would make a CSV file containing the URLs for each image:
-
-    image_url
-    http://example.com/image_with_red_ball.png
-    http://example.com/image_without_red_ball.png
-
-Then you'd make an HTML template for the task:
-
-```html
-<img src="${image_url}" />
-<input type=radio name=has_button value="yes" /> Has a red ball<br/>
-<input type=radio name=has_button value="no" /> Does not have a red ball<br/>
-```
-
-Finally, you'd start up the Local Turk server:
-
-    $ localturk path/to/template.html path/to/tasks.csv path/to/output.csv
-
-Now you can visit http://localhost:4321/ to complete each task. When you're done, the output.csv file will contain
-
-    image_url,has_button
-    http://example.com/image_with_red_ball.png,yes
-    http://example.com/image_without_red_ball.png,no
-
-Image Classification
---------------------
-
-The use case described above (classifying images) is an extremely common one.
-
-To expedite this, localturk provides a separate script for doing image
-classification. The example above could be written as:
-
-    classify-images --labels 'Has a red ball,Does not have a red ball' *.png
-
-This will bring up a web server with a UI for assigning one of those two labels
-to each image on your local file system. The results will go in `output.csv`.
-
-For more details, run `classify-images --help`.
-
-Tips & Tricks
--------------
-
-It can be hard to remember the exact format for template files. localturk can help! Run it with
-the `--write-template` argument to generate a template file for your input that you can edit:
-
-    localturk --write-template tasks.csv > template.html
-
-When you're going through many tasks, keyboard shortcuts can speed things up tremendously.
-localturk supports these via the `data-key` attribute on form elements. For example, make yourer
-submit button look like this:
-
-    <input type="submit" name="result" value="Good" data-key="d">
-
-Now, when you press `d`, it'll automatically click the "Good" button for you. _Note that this
-feature is not available on mechanical turk itself!_
-
-Development
------------
-
-To make changes to localturk, clone it and set it up using `yarn`:
-
-    yarn
-
-You can run `localturk.ts` or `classify-images.ts` directly using `ts-node`:
-
-    ts-node localturk.ts path/to/template.html path/to/tasks.csv path/to/output.csv
-
-To type check and run the tests:
-
-    yarn tsc
-    yarn test
-
-To publish a new version on npm, run:
-
-    yarn tsc
-    yarn publish
+    Preprocess annotated dataset:
+        python prefill.py [origin_path]
+    
+    Review / validate annotations
+        ts-node localturk.ts [validation_template.html] [input.csv] [output.csv]
+        Then visit http://localhost:4321/ to start review / validation
+        
+    Example:
+    ts-node localturk.ts forms/validation.html test_data/validate_prefilled.csv test_data/output.csv
+    Then visit http://localhost:4321/ to start review / validation
