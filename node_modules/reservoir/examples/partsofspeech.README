@@ -1,0 +1,10 @@
+To keep the size of this library small, the data file that the 
+script partsofspeech.js requires isn't included.
+
+You can get the "Part Of Speech Database" from:
+
+http://wordlist.sourceforge.net/
+
+Unpack the data into this directory so that the 'pos' directory
+is a direct subdirectory of this one. The script tries to open the
+file `./pos/part-of-speech.txt`.
