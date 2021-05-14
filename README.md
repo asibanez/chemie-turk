@@ -8,7 +8,7 @@ Chemie-turk builds on top of localturk (https://github.com/danvk/localturk) incl
 
    1. Annotation review and fine-tuning options
    2. Improved interface with expanded functionalities (e.g. multi-step reaction annotation, paper access, etc.)
-   3. Chemistry specific annotation schemas
+   3. Chemistry-specific annotation schemas
 
 It's handy if you want to:
 
