@@ -4,7 +4,7 @@
 chemie-turk
 =========
 
-Chemie-turk builds on top of localturk (https://github.com/danvk/localturk) including additional functionalities and chemistry specific annotation schemas and functionalities
+Chemie-turk builds on top of localturk (https://github.com/danvk/localturk) including chemistry specific annotation schemas and functionalities
 
    1. Annotation review and fine-tuning options
    2. Improved interface with expanded functionalities (e.g. multi-step reaction annotation, paper access, etc.)
